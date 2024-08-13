@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Event Posters Grid</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="grid-container">
+        <div class="grid-item">Poster 1</div>
+        <div class="grid-item">Poster 2</div>
+        <div class="grid-item">Poster 3</div>
+        <div class="grid-item">Poster 4</div>
+        <div class="grid-item">Poster 5</div>
+        <div class="grid-item">Poster 6</div>
+        <div class="grid-item">Poster 7</div>
+        <div class="grid-item">Poster 8</div>
+        <div class="grid-item">Poster 9</div>
+        <div class="grid-item">Poster 10</div>
+        <div class="grid-item">Poster 11</div>
+        <div class="grid-item">Poster 12</div>
+    </div>
+</body>
+</html>
+
+<style>
+    body {
+    font-family: Arial, sans-serif;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 200vh;
+    margin: 0;
+    background-color: #f0f0f0;
+}
+
+.grid-container {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 10px;
+    padding: 20px;
+    background-color: #fff;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.grid-item {
+    background-color: #e0e0e0;
+    padding: 100px ;
+    height: 200px;
+    text-align: center;
+    border-radius: 5px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+</style>
