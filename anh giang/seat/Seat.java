@@ -16,7 +16,6 @@ public class Seat
     @GeneratedValue(strategy = GenerationType.IDENTITY) 
     private    int id;
     private String row; 
-    private int column; 
+    private String column; 
     private boolean status;
-
 }
