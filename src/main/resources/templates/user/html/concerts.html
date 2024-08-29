@@ -1,0 +1,35 @@
+<div class="grid-container">
+    <div class="grid-item" th:each="dl : ${ds}">
+        <!-- <span th:text="${dl.id}"></span> -->
+        <span th:text="${dl.name}"></span>
+        <span th:text="${dl.name}"></span>
+        <span th:text="${dl.Duration}"></span>
+        <span th:text="${dl.startSale}"></span>
+        <span th:text="${dl.endSale}"></span>
+        <button>Mua ngay</button>
+    </div>
+</div>
+
+
+<style>
+
+
+.grid-container {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 10px;
+    padding: 20px;
+    background-color: #fff;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.grid-item {
+    background-color: #e0e0e0;
+    padding: 100px ;
+    height: 400px;
+    border-radius: 5px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+</style>
