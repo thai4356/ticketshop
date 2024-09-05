@@ -16,31 +16,43 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpSession;
+
 @Controller
 public class QdlCategory 
 {
     @Autowired
     private DvlCategory dvl;
+
+    @Autowired
+    private HttpServletRequest request;
+
+    @Autowired
+    private HttpSession session;
+
     @GetMapping({
-            "/tên_đường_dẫn",
-            "/tên_đường_dẫn/duyet"
+            "/category",
+            "/category/duyet"
     })
     public String getDuyet(Model model) 
     {
         // Đọc dữ liệu bảng rồi chứa vào biến tạm
         List<Category> list = dvl.duyệtCategory();
+        Category dl = new Category();
 
         // Gửi danh sách sang giao diện View HTML
         model.addAttribute("ds", list);
+        model.addAttribute("dl", dl);
 
         // Nội dung riêng của trang...
-        model.addAttribute("content", "tên_đường_dẫn/duyet.html"); // duyet.html
+        model.addAttribute("content", "admin/pages/category-manager.html"); // duyet.html
 
         // ...được đặt vào bố cục chung của toàn website
-        return "layout.html"; 
+        return "admin/index.html"; 
     }
 
-    @GetMapping("/tên_đường_dẫn/them")
+    @GetMapping("/category/them")
     public String getThem(Model model) {
         Category dl = new Category();
 
@@ -48,12 +60,13 @@ public class QdlCategory
         // để còn ràng buộc vào html form
         model.addAttribute("dl", dl);
 
+        model.addAttribute("action", "/category/them");
         // Nội dung riêng của trang...
-        model.addAttribute("content", "tên_đường_dẫn/them.html"); 
-//        model.addAttribute("dsBangNgoai", this.dvlBangNgoai.dsBangNgoai());
+        model.addAttribute("content", "admin/pages/category-manager.html"); 
+//        model.addAttribute("dsBangNgoai", this.dvlBangNgoai.dsB  angNgoai());
 
         // ...được đặt vào bố cục chung của toàn website
-        return "layout.html"; 
+        return "admin/index.html"; 
     }
 
     // @GetMapping("/tên_đường_dẫn/sua/{id}")
@@ -78,7 +91,7 @@ public class QdlCategory
     // @GetMapping("/tên_đường_dẫn/xoa/{id}")
     // public String // Giao diện xác nhận xoá
     // trangXoa(Model model, @PathVariable(value = "id") int id) {
-    @GetMapping("/tên_đường_dẫn/xoa")
+    @GetMapping("/category/xoa")
     public String getXoa(Model model, @RequestParam(value = "id") int id) {
         // Lấy ra bản ghi theo id
         Category dl = dvl.tìmCategoryTheoId(id);
@@ -92,6 +105,22 @@ public class QdlCategory
 
         // ...được đặt vào bố cục chung của toàn website
         return "layout.html"; // layout.html
+    }
+
+    @GetMapping("/category/xoa/ajax")
+    public String getXoaAjax(Model model, @RequestParam("id") int id) 
+    {
+        // if( Qdl.NhanVienChuaDangNhap(request) )
+        //     return "redirect:/qdl/nhanvien/dangnhap";
+
+        // Lấy ra bản ghi theo mã định danh
+        var dl = dvl.xemCategory(id);
+
+        // Gửi đối tượng dữ liệu sang giao diện (ui view) html form
+        model.addAttribute("dl", dl);
+        model.addAttribute("action", "/category/xoa");
+
+        return "category/duyet.html"; // layout.html
     }
 
     @GetMapping("/tên_đường_dẫn/xem/{id}")
@@ -116,7 +145,7 @@ public class QdlCategory
     // https://stackoverflow.com/questions/55882706/how-to-remove-attribute-from-session-using-thymeleaf
     // https://stackoverflow.com/questions/46744586/thymeleaf-show-a-success-message-after-clicking-on-submit-button
     // @PostMapping("/tên_đường_dẫn/add") why not ??? it's okay right ?
-    @PostMapping("/tên_đường_dẫn/them")
+    @PostMapping("/category/them")
     public String postThem(@ModelAttribute("Category") Category dl, RedirectAttributes redirectAttributes) {
         // System.out.print("save action...");
         
@@ -127,41 +156,59 @@ public class QdlCategory
         dvl.lưuCategory(dl);
 
         // Gửi thông báo thành công từ view Add/Edit sang view List
-        redirectAttributes.addFlashAttribute("THONG_BAO_OK", "Đã thêm mới thành công !");
+        session.setAttribute("message", "Đã hoàn tất việc thêm mới !");
 
-        return "redirect:/tên_đường_dẫn/duyet";
+        return "redirect:/category/duyet";
     }
 
     // How to send success message to List View
     // https://www.appsloveworld.com/springmvc/100/17/how-to-add-success-notification-after-form-submit
   
-    @PostMapping("/tên_đường_dẫn/sua")
-    public String postSua(@ModelAttribute("Category") Category dl, RedirectAttributes redirectAttributes) {
-        
-        //@todo sửa chỗ này đi
-        
-        //dl.setNgaySua(LocalDate.now());
-        
-        dvl.lưuCategory(dl);
+    @GetMapping("category/suaajax")
+    public String getSuaAjax(Model model, @RequestParam("id") int id) 
+    {
 
-        // Gửi thông báo thành công từ view Add/Edit sang view List
-        redirectAttributes.addFlashAttribute("THONG_BAO_OK", "Đã sửa thành công !");
+        // Lấy ra bản ghi theo mã định danh
+        var dl = dvl.xemCategory(id);
 
-        return "redirect:/tên_đường_dẫn/duyet";
+        // Gửi đối tượng dữ liệu sang giao diện (ui view) html form
+        model.addAttribute("dl", dl);
+        model.addAttribute("action", "/category/sua");
+
+        // Hiển thị giao diện view html
+        // Nội dung riêng của trang...
+        // model.addAttribute("content", "nhasanxuat/sua.html"); // sua.html
+
+        // ...được đặt vào bố cục chung của toàn website
+        // return "nhasanxuat/form-sua-bs4.html"; // layout.html
+        return "admin/pages/sua-cat-modal.html"; // layout.html
     }
 
     // @PostMapping("/tên_đường_dẫn/xoabo/{id}")
     // public String // Hàm xử lý yêu cầu xoá 1 bản ghi
     //         xoabo(Model model, @PathVariable(value = "id") int id) 
     
-    @PostMapping("/tên_đường_dẫn/xoa")
-    public String postXoa(Model model, @RequestParam("Id") int id) // request param phải khớp với name="Id" của thẻ html input
+    @PostMapping("/category/sua")
+    public String postSua(@ModelAttribute("Category") Category dl) 
+    {
+        
+        dvl.lưuCategory(dl);
+        // dvl.luu(dl);
+
+        // Gửi thông báo thành công từ view Add/Edit sang view List
+        session.setAttribute("message", "Đã hoàn tất việc cập nhật !");
+
+        return "redirect:/category/duyet";
+    }
+    
+    @PostMapping("/category/xoa")
+    public String postXoa(Model model, @RequestParam("id") int id) // request param phải khớp với name="Id" của thẻ html input
     {
         // Xoá dữ liệu
         this.dvl.xóaCategory(id);
 
         // Điều hướng sang trang giao diện
-        return "redirect:/tên_đường_dẫn/duyet";
+        return "redirect:/category/duyet";
     }
 
 

@@ -31,8 +31,15 @@ public class QdlUser
         
         model.addAttribute("ds", list);
 
+
         
         model.addAttribute("content", "user/html/index.html"); 
+        // Nội dung riêng của trang...
+        model.addAttribute("content", "admin/pages/user-manager.html"); // duyet.html
+
+        // ...được đặt vào bố cục chung của toàn website
+        return "admin/index.html"; 
+
 
         
         return "layout.html";
