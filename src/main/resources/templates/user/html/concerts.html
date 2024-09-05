@@ -1,20 +1,59 @@
+
 <div class="grid-container">
-    <div class="grid-item" th:each="dl : ${ds}">
-        <!-- <span th:text="${dl.id}"></span> -->
-        <span th:text="${dl.name}"></span>
-        <span th:text="${dl.name}"></span>
-        <span th:text="${dl.Duration}"></span>
-        <span th:text="${dl.startSale}"></span>
-        <span th:text="${dl.endSale}"></span>
-        <button>Mua ngay</button>
+  <div class="grid-item" th:each="concert : ${ds.concerts}">
+    <div class="grid-item" th:each="image : ${ds.images}">
+
     </div>
+  </div>
 </div>
 
+<button id="see-more" th:if="${ds.concerts.size() > shownItems}" onclick="loadMore()">See More</button>
+
+<script th:inline="javascript">
+  let items = /*[[${ds.concerts}]]*/[];
+  let imgContents = /*[[${ds.images}]]*/[];
+  let shownItems = 7; 
+
+  function loadMore() {
+    console.log("Load more clicked");
+    shownItems += 7; // Increase the number of shown items
+    updateDisplayedItems();
+  }
+
+  function updateDisplayedItems() {
+    let itemContainer = document.querySelector('.grid-container');
+    itemContainer.innerHTML = ''; // Clear existing items
+
+    for (let i = 0; i < Math.min(shownItems, items.length); i++) {
+      let item = items[i];
+      let imgContent = imgContents[i];
+      let div = document.createElement('div');
+      div.className = 'grid-item';
+      let imgTag = imgContent && imgContent.img ? `<img src="${imgContent.img}" alt="Image">` : 'No image available';
+      div.innerHTML = `
+          <span>${imgTag}</span>
+          <span>${item.id}</span>
+          <span> ${item.name}</span>
+          <span>${item.duration}</span>
+          <span>${item.startSale}</span>
+          <span>${item.endSale}</span>
+          <a href="/concert/xem/${item.id}"><button>Mua ngay</button></a>
+      `;
+      itemContainer.appendChild(div);
+    }
+
+    // Hide the button if all items are shown
+    if (shownItems >= items.length) {
+      document.getElementById('see-more').style.display = 'none';
+    }
+  }
+
+  // Call updateDisplayedItems initially to render the first set of items
+  updateDisplayedItems();
+</script>
 
 <style>
-
-
-.grid-container {
+  .grid-container {
     display: grid;
     grid-template-columns: repeat(5, 1fr);
     gap: 10px;
@@ -22,14 +61,30 @@
     background-color: #fff;
     border-radius: 10px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-}
+  }
 
-.grid-item {
+  .grid-item {
     background-color: #e0e0e0;
-    padding: 100px ;
+    padding: 100px;
     height: 400px;
     border-radius: 5px;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-}
+  }
 
+  #see-more {
+    display: block;
+    margin: 20px auto;
+    padding: 10px 20px;
+    font-size: 16px;
+    color: #fff;
+    background-color: #007bff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    text-align: center;
+  }
+
+  #see-more:hover {
+    background-color: #0056b3;
+  }
 </style>

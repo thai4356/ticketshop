@@ -1,4 +1,5 @@
-package web.thaiticketmajor.Models.concert;
+package web.thaiticketmajor.Models.image;
+
 
 import java.util.List;
 import java.util.Optional;
@@ -6,14 +7,12 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import web.thaiticketmajor.Models.image.Image;
-
 @Service
-public class DvlConcert
+public class DvlImage
 {
-    @Autowired private KdlConcert kdl;// kho dữ liệu;
+    @Autowired private KdlImage kdl;// kho dữ liệu;
 
-     public List<Concert> dsConcert() // getAllConcert()
+    public List<Image> dsImage() // getAllImage()
     {
   
         // return null;
@@ -22,28 +21,21 @@ public class DvlConcert
         return kdl.findAll();
     }
 
-     public List<Concert>  duyệtConcert() 
+    public List<Image>  duyệtImage() 
     {
         return kdl.findAll();
     }
 
-    @Autowired private Kdl_img kdls;
-    public List<Image>  duyệtImage() 
-    {
-        return kdls.findAll();
-    }
-
-
-     public Concert  tìmConcertTheoId(int id)// 
+    public Image  tìmImageTheoId(int id)// 
     {
         // TODO Auto-generated method stub
         // return null;
 
         // return kdl.findById(id);
 
-        Concert dl = null;
+        Image dl = null;
 
-        Optional<Concert> optional = kdl.findById(id);
+        Optional<Image> optional = kdl.findById(id);
 
         if// nếu
         (optional.isPresent()) // tìm thấy bản ghi trong kho
@@ -58,12 +50,12 @@ public class DvlConcert
 
     }
 
-     public Concert xemConcert(int id)// 
+    public Image xemImage(int id)// 
     {
 
-        Concert dl = null;
+        Image dl = null;
 
-        Optional<Concert> optional = kdl.findById(id);
+        Optional<Image> optional = kdl.findById(id);
 
         if// nếu
         (optional.isPresent()) // tìm thấy bản ghi trong kho
@@ -79,17 +71,18 @@ public class DvlConcert
     }
 
     
-    public void lưuConcert(Concert dl)
+    public void lưuImage(Image dl)
     {
         // TODO Auto-generated method stub
         this.kdl.save(dl);
     }
 
-    
-    public void xóaConcert(int id)
+    public void xóaImage(int id)
     {
         // TODO Auto-generated method stub
         this.kdl.deleteById(id);
     }
 
+
 }
+
