@@ -62,10 +62,10 @@ public class QdlUser
         model.addAttribute("ds", list);
 
         // Nội dung riêng của trang...
-        model.addAttribute("content", "user/html/index.html"); // duyet.html
+        model.addAttribute("content", "admin/pages/user-manager.html"); // duyet.html
 
         // ...được đặt vào bố cục chung của toàn website
-        return "layout.html"; 
+        return "admin/index.html"; 
 
         
     }
