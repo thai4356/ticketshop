@@ -1,4 +1,4 @@
-package web.thaiticketmajor.Models.image;
+package web.thaiticketmajor.Services;
 
 
 import java.util.List;
@@ -7,12 +7,15 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-@Service
-public class DvlImage
-{
-    @Autowired private KdlImage kdl;// kho dữ liệu;
+import web.thaiticketmajor.Models.User;
+import web.thaiticketmajor.Repositories.KdlUser;
 
-    public List<Image> dsImage() // getAllImage()
+@Service
+public class DvlUser 
+{
+    @Autowired private KdlUser kdl;// kho dữ liệu;
+
+    public List<User> dsUser() // getAllUser()
     {
   
         // return null;
@@ -21,21 +24,21 @@ public class DvlImage
         return kdl.findAll();
     }
 
-    public List<Image>  duyệtImage() 
+    public List<User>  duyệtUser() 
     {
         return kdl.findAll();
     }
 
-    public Image  tìmImageTheoId(int id)// 
+    public User  tìmUserTheoId(int id)// 
     {
         // TODO Auto-generated method stub
         // return null;
 
         // return kdl.findById(id);
 
-        Image dl = null;
+        User dl = null;
 
-        Optional<Image> optional = kdl.findById(id);
+        Optional<User> optional = kdl.findById(id);
 
         if// nếu
         (optional.isPresent()) // tìm thấy bản ghi trong kho
@@ -50,12 +53,12 @@ public class DvlImage
 
     }
 
-    public Image xemImage(int id)// 
+    public User xemUser(int id)// 
     {
 
-        Image dl = null;
+        User dl = null;
 
-        Optional<Image> optional = kdl.findById(id);
+        Optional<User> optional = kdl.findById(id);
 
         if// nếu
         (optional.isPresent()) // tìm thấy bản ghi trong kho
@@ -71,18 +74,17 @@ public class DvlImage
     }
 
     
-    public void lưuImage(Image dl)
+    public void lưuUser(User dl)
     {
         // TODO Auto-generated method stub
         this.kdl.save(dl);
     }
 
-    public void xóaImage(int id)
+    
+    public void xóaUser(int id)
     {
         // TODO Auto-generated method stub
         this.kdl.deleteById(id);
     }
 
-
 }
-

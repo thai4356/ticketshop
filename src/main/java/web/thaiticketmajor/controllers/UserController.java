@@ -1,4 +1,4 @@
-package web.thaiticketmajor.Models.user;
+package web.thaiticketmajor.controllers;
 
 import java.util.List;
 
@@ -11,6 +11,9 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+
+import web.thaiticketmajor.Models.User;
+import web.thaiticketmajor.Services.DvlUser;
 
 
 @Controller
@@ -31,15 +34,8 @@ public class QdlUser
         
         model.addAttribute("ds", list);
 
-
         
         model.addAttribute("content", "user/html/index.html"); 
-        // Nội dung riêng của trang...
-        model.addAttribute("content", "admin/pages/user-manager.html"); // duyet.html
-
-        // ...được đặt vào bố cục chung của toàn website
-        return "admin/index.html"; 
-
 
         
         return "layout.html";

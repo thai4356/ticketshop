@@ -1,4 +1,4 @@
-package web.thaiticketmajor.Models.category;
+package web.thaiticketmajor.Services;
 
 
 import java.util.List;
@@ -7,6 +7,9 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import web.thaiticketmajor.Models.Category;
+import web.thaiticketmajor.Repositories.KdlCategory;
+//service
 @Service
 public class DvlCategory
 {

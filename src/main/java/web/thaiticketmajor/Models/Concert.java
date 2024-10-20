@@ -1,5 +1,6 @@
-package web.thaiticketmajor.Models.concert;
+package web.thaiticketmajor.Models;
 import java.time.LocalDate;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -22,6 +23,7 @@ public class Concert {
     private LocalDate startDate;
     private String videoLink;
     private boolean status;
+    private String banner;
     @Column(columnDefinition = "LONGTEXT")
     private String moTa;
     public int Popularity;

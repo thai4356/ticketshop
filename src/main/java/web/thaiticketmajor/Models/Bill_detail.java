@@ -1,4 +1,4 @@
-package web.thaiticketmajor.Models.bill_detail;
+package web.thaiticketmajor.Models;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -8,8 +8,6 @@ import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import lombok.Getter;
 import lombok.Setter;
-import web.thaiticketmajor.Models.bill.Bill;
-import web.thaiticketmajor.Models.ticket.Ticket;
 
 @Entity
 @Getter

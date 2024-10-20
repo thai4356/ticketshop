@@ -1,4 +1,4 @@
-package web.thaiticketmajor.Models.concert;
+package web.thaiticketmajor.controllers;
 
 import java.util.HashMap;
 
@@ -19,7 +19,9 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-import web.thaiticketmajor.Models.image.Image;
+import web.thaiticketmajor.Models.Concert;
+import web.thaiticketmajor.Models.Image;
+import web.thaiticketmajor.Services.ConcertService;
 
 // Thư viện lập trình Java Web do lập trình viên tự phát triển:
 // import Tên_Công_Ty.Tên_Dự_Án.dvl.DvlConcert;
@@ -44,9 +46,9 @@ import web.thaiticketmajor.Models.image.Image;
  */
 
 @Controller
-public class QdlConcert {
+public class ConcertController {
     @Autowired
-    private DvlConcert dvl; // cung cấp các dịch vụ thao tác dữ liệu
+    private ConcertService dvl; // cung cấp các dịch vụ thao tác dữ liệu
 
     // @Autowired
     // private DvlBảngNgoại dvlBangNgoai; // cung cấp các dịch vụ thao tác dữ liệu

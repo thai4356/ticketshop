@@ -1,4 +1,4 @@
-package web.thaiticketmajor.Models.user;
+package web.thaiticketmajor.Models;
 
 
 
@@ -27,8 +27,4 @@ public class User
     private int phoneNo;
     private boolean status;
     private byte roleID;
-
-    public String getStatus() {
-        return this.status ? "Online" : "Offline";
-    }
 }

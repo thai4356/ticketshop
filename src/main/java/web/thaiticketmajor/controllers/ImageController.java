@@ -1,4 +1,4 @@
-package web.thaiticketmajor.Models.image;
+package web.thaiticketmajor.controllers;
 
 //package Tên_Công_Ty.Tên_Dự_Án.qdl;
 
@@ -15,6 +15,9 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+
+import web.thaiticketmajor.Models.Image;
+import web.thaiticketmajor.Services.DvlImage;
 
 // Thư viện lập trình Java Web do lập trình viên tự phát triển:
 // import Tên_Công_Ty.Tên_Dự_Án.dvl.DvlImage;
